@@ -38,6 +38,9 @@ jobs:
       - name: Build
         run: make build_darwin
 
+      - name: List all files in directory
+        run: ls -a
+
         # run the binary to view version
       - name: Run
         run: ./bin/ssv-dkg -v
