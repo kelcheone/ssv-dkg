@@ -9,7 +9,7 @@ var (
 	AppName = "ssv-dkg"
 
 	// Version is the app version
-	Version = "latest"
+	Version = "v2.1.0"
 )
 
 func main() {
