@@ -77,9 +77,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: |
-            bin/ssv-dkg
-          tag_name: v2.1.0 - ${{ github.run_number }} - macOS
+          tag_name: v2.1.0-${{ github.run_number }}-macOS
           release_name: Release v2.1.0 - macOS
           body: |
             Changes in this Release:
