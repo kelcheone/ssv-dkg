@@ -45,7 +45,7 @@ jobs:
 
         # run the binary to view version
       - name: Run
-        run: ./bin/ssv-dkg-darwin -v
+        run: ./bin/ssv-dkg-darwin version
 
         # save the binary as an artifact
       - name: Archive
