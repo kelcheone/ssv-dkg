@@ -39,11 +39,13 @@ jobs:
         run: make build_darwin
 
       - name: List all files in directory
-        run: ls -a
+        run: |
+          ls -a
+          ls -a bin
 
         # run the binary to view version
       - name: Run
-        run: ./bin/ssv-dkg -v
+        run: ./bin/ssv-dkg-darwin -v
 
         # save the binary as an artifact
       - name: Archive
