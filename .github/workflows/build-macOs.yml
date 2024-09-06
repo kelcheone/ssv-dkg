@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ssv-dkg
-          path: bin/ssv-dkg
+          path: bin/ssv-dkg-darwin
 
   release:
     needs: build
@@ -92,6 +92,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: bin/ssv-dkg
-          asset_name: ssv-dkg
+          asset_path: bin/ssv-dkg-darwin
+          asset_name: ssv-dkg-darwin
           asset_content_type: application/octet-stream
