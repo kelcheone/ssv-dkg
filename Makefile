@@ -24,10 +24,17 @@ clean:
 	env GO111MODULE=on go clean -cache
 
 # Recipe to compile the Go program
-build:
+build_linux:
 	@echo "Building Go binary..."
-	go build -o $(BINARY_NAME) -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
+	GOOS=linux GOARCH=amd64 go build -o $(BINARY_NAME) -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
 
+
+build_darwin: # MacOS
+	@echo "Building Go binary..."
+	GOOS=darwin GOARCH=amd64 go build -o $(BINARY_NAME)-darwin -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go 
+
+build: build_linux  build_darwin
+ 
 # Recipe to run tests
 test:
 	@echo "running tests"
