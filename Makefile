@@ -15,6 +15,9 @@ BINARY_NAME=./bin/ssv-dkg
 # Docker image name
 DOCKER_IMAGE=ssv-dkg
 
+DEFAULT_VERSION = "ssv-dkg version v2.1.0"
+Version = $( shell git describe --tags $(shell git rev-list --tags --max-count=1) 2>/dev/null || echo $(DEFAULT_VERSION))
+
 install:
 	$(GOINSTALL) -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" cmd/ssv-dkg/ssv-dkg.go
 	@echo "Done building."
@@ -34,8 +37,7 @@ build_windows:
 
 build_darwin: # MacOS
 	@echo "Building Go binary..."
-	CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o $(BINARY_NAME)-darwin -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go 
-
+	CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o $(BINARY_NAME)-darwin -ldflags "-X main.Version=$(VERSION)" ./cmd/ssv-dkg/ssv-dkg.go 
 build: build_linux build_windows build_darwin
  
 # Recipe to run tests
