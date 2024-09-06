@@ -45,6 +45,7 @@ jobs:
       - name: Run
         #  create a dir called iniator_logs/ then run make test-initiator
         run: |
+          ./bin/ssv-dkg-darwin version  
           mkdir -p initiator_logs/
           make dkg_initiator
 

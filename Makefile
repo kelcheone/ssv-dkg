@@ -37,7 +37,7 @@ build_windows:
 
 build_darwin: # MacOS
 	@echo "Building Go binary..."
-	CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o $(BINARY_NAME)-darwin -ldflags "-X main.Version=$(VERSION)" ./cmd/ssv-dkg/ssv-dkg.go 
+	CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o $(BINARY_NAME)-darwin -ldflags "-X main.Version=v2.1.0" ./cmd/ssv-dkg/ssv-dkg.go 
 build: build_linux build_windows build_darwin
  
 # Recipe to run tests

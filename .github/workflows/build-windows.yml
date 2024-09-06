@@ -31,12 +31,8 @@ jobs:
 
       - name: Build project
         run: |
-          $tag = git describe --tags $(git rev-list --tags --max-count=1) 2>$null
-           if (-not $tag) {
-             $tag = "v2.1.0"
-           }
-           $env:CGO_ENABLED=1
-           $env:GOOS="windows"
-           $env:GOARCH="amd64"
-           go build -o $env:BINARY_NAME.exe -ldflags "-X main.Version=$tag" ./cmd/ssv-dkg/ssv-dkg.go
+          $env:CGO_ENABLED=1
+          $env:GOOS="windows"
+          $env:GOARCH="amd64"
+          go build -o $env:BINARY_NAME.exe -ldflags "-X main.Version=v2.1.0" ./cmd/ssv-dkg/ssv-dkg.go
         shell: pwsh
