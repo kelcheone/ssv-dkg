@@ -24,33 +24,16 @@ jobs:
         with:
           go-version: "1.22"
 
-        # install bls and mcl using homebrew
-
-        #   first run go  go get -u github.com/quic-go/quic-go then run go mod tidy
       - name: Get dependencies
-        run: go get -u github.com/quic-go/quic-go && go get -u github.com/herumi/bls-eth-go-binary && go mod tidy
-
-        # run make install to get required dependencies
-      - name: Install dependencies
-        run: make install
-
-        # run make build to build the project
-      - name: Build
         run: |
-          CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -o $(BINARY_NAME).exe -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
+          go get -u github.com/quic-go/quic-go
+          go mod tidy
 
-      - name: List all files in directory
+      - name: Build project
         run: |
-          ls -a
-          ls -a bin
-
-        # run the binary to view version
-      - name: Run
-        run: ./bin/ssv-dkg.exe --help
-
-        # save the binary as an artifact
-      - name: Archive
-        uses: actions/upload-artifact@v4
-        with:
-          name: ssv-dkg
-          path: bin/ssv-dkg.exe
+          $version = (git describe --tags $(git rev-list --tags --max-count=1))
+          $env:CGO_ENABLED=1
+          $env:GOOS="windows"
+          $env:GOARCH="amd64"
+          go build -o $env:BINARY_NAME.exe -ldflags "-X main.Version=$version" ./cmd/ssv-dkg/ssv-dkg.go
+        shell: pwsh
