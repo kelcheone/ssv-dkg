@@ -43,9 +43,10 @@ jobs:
 
         # run the binary to view version
       - name: Run
+        #  create a dir called iniator_logs/ then run make test-initiator
         run: |
-          ./bin/ssv-dkg-darwin version
-          ./bin/ssv-dkg-darwin --help
+          mkdir -p initiator_logs/
+          make dkg_initiator
 
         # save the binary as an artifact
       - name: Archive
