@@ -41,7 +41,7 @@ jobs:
 
       - name: Build project
         run: |
-          go build -o $env:BINARY_NAME.exe ./cmd/ssv-dkg
+          go build -o $env:BINARY_NAME.exe ./cmd/ssv-dkg/main.go
         shell: pwsh
 
       - name: List all files in directory
