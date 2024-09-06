@@ -28,14 +28,20 @@ jobs:
         run: |
           go get -u github.com/quic-go/quic-go
           go mod tidy
-
-      - name: Build project
+      - name: Set environment variables
         run: |
           $env:BINARY_NAME="./bin/ssv-dkg-windows"
           $env:CGO_ENABLED=1
           $env:GOOS="windows"
           $env:GOARCH="amd64"
-          go build -o $env:BINARY_NAME.exe ./cmd/ssv-dkg/ssv-dkg.go
+
+      - name: Debug Directory
+        run: |
+          ls -R
+
+      - name: Build project
+        run: |
+          go build -o $env:BINARY_NAME.exe ./cmd/ssv-dkg
         shell: pwsh
 
       - name: List all files in directory
