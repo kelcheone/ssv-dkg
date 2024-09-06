@@ -28,12 +28,15 @@ build_linux:
 	@echo "Building Go binary..."
 	GOOS=linux GOARCH=amd64 go build -o $(BINARY_NAME) -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
 
+build_windows:
+	@echo "Building Go binary..."
+	GOOS=windows GOARCH=amd64 go build -o $(BINARY_NAME).exe -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
 
 build_darwin: # MacOS
 	@echo "Building Go binary..."
 	GOOS=darwin GOARCH=amd64 go build -o $(BINARY_NAME)-darwin -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go 
 
-build: build_linux  build_darwin
+build: build_linux build_windows build_darwin
  
 # Recipe to run tests
 test:
