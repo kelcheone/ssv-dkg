@@ -31,8 +31,20 @@ jobs:
 
       - name: Build project
         run: |
+          $env:BINARY_NAME="./bin/ssv-dkg-windows"
           $env:CGO_ENABLED=1
           $env:GOOS="windows"
           $env:GOARCH="amd64"
           go build -o $env:BINARY_NAME.exe -ldflags "-X main.Version=v2.1.0" ./cmd/ssv-dkg/ssv-dkg.go
         shell: pwsh
+
+      - name: List all files in directory
+        run: |
+          ls -a
+          ls -a bin
+
+      - name: Run
+        run: |
+          .\bin\ssv-dkg-windows.exe version
+          mkdir -p initiator_logs
+        #   make dkg_initiator_windows

@@ -131,3 +131,8 @@ gosec:
 
 dkg_initiator:
 	./bin/ssv-dkg-darwin init --validators 10 --operatorIDs 11,21,24,29 --operatorsInfoPath ./config/operators-holesky.json --owner 0x81592c3de184a3e2c0dcb5a261bc107bfa91f494 --nonce 4 --withdrawAddress 0xa1a66cc5d309f19fb2fda2b7601b223053d0f7f4 --network "holesky" --outputPath ./output --logLevel info --logFormat json --logLevelFormat capitalColor --logFilePath ./initiator_logs/debug.log
+
+
+dkg_initiator_windows:
+	./bin/ssv-dkg.exe init --validators 10 --operatorIDs 11,21,24,29 --operatorsInfoPath ./config/operators-holesky.json --owner 0x81592c3de184a3e2c0dcb5a261bc107bfa91f494 --nonce 4 --withdrawAddress 0xa1a66cc5d309f19fb2fda2b7601b223053d0f7f4 --network "holesky" --outputPath ./output --logLevel info --logFormat json --logLevelFormat capitalColor --logFilePath ./initiator_logs/debug.log
+
