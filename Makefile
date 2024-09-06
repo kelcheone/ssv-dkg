@@ -16,7 +16,7 @@ BINARY_NAME=./bin/ssv-dkg
 DOCKER_IMAGE=ssv-dkg
 
 DEFAULT_VERSION = "v2.1.0"
-Version = $( shell git describe --tags $(shell git rev-list --tags --max-count=1) 2>/dev/null || echo $(DEFAULT_VERSION))
+Version = $( shell git describe --tags $$(shell git rev-list --tags --max-count=1) 2>/dev/null || echo $(DEFAULT_VERSION))
 
 install:
 	$(GOINSTALL) -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" cmd/ssv-dkg/ssv-dkg.go
