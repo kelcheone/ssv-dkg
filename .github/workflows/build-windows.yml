@@ -1,5 +1,3 @@
-# This builds the Windows version of the project. It uses the same Go version as the Linux build, but it uses a different runner and different steps
-
 name: Build Windows
 
 on:
@@ -28,30 +26,26 @@ jobs:
         run: |
           go get -u github.com/quic-go/quic-go
           go mod tidy
-      #   - name: Set environment variables
-      #     run: |
-      #       $env:BINARY_NAME="./bin/ssv-dkg-windows"
-      #       $env:CGO_ENABLED=1
-      #       $env:GOOS="windows"
-      #       $env:GOARCH="amd64"
 
       - name: Debug Directory
         run: |
-          ls -R ./cmd/ssv-dkg
+          Get-ChildItem -Recurse .\cmd\ssv-dkg
 
       - name: Build project
-        # run: |
-        #   go build -o $env:BINARY_NAME.exe ./cmd/ssv-dkg/main.go
-        run: CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -o ./bin/ssv-dkg-windows.exe ./cmd/ssv-dkg/main.go
+        run: |
+          $env:CGO_ENABLED=1
+          $env:GOOS="windows"
+          $env:GOARCH="amd64"
+          go build -o ./bin/ssv-dkg-windows.exe .\cmd\ssv-dkg
         shell: pwsh
 
       - name: List all files in directory
         run: |
-          ls -a
-          ls -a bin
+          Get-ChildItem -Force
+          Get-ChildItem -Force bin
 
       - name: Run
         run: |
           .\bin\ssv-dkg-windows.exe version
-          mkdir -p initiator_logs
-        #   make dkg_initiator_windows
+          New-Item -ItemType Directory -Force -Path initiator_logs
+        shell: pwsh
