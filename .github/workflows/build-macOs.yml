@@ -34,8 +34,7 @@ jobs:
 
         # run make build to build the project
       - name: Build
-        run: |
-          CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o ./bin/ssv-dkg-darwin -ldflags "-X main.Version=`git describe --tags $(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
+        run: make build_darwin
 
       - name: List all files in directory
         run: |
