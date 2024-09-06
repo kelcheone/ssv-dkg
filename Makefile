@@ -33,7 +33,7 @@ build_linux:
 
 build_windows:
 	@echo "Building Go binary..."
-	GOOS=windows GOARCH=amd64 go build -o $(BINARY_NAME).exe -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
+	CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -o $(BINARY_NAME).exe -ldflags "-X main.Version=`git describe --tags $$(git rev-list --tags --max-count=1)`" ./cmd/ssv-dkg/ssv-dkg.go
 
 build_darwin: # MacOS
 	@echo "Building Go binary..."
